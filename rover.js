@@ -12,38 +12,42 @@ class Rover {
   receiveMessage(message) {
 
     // return currentStatus //For Testing
-  
-    let currentStatus = {"message": message.name, "results":[]}
-    // let results = [{"message": message.name}]
+    
+    // let currentStatus = {"message": message.name, "results":[]}
+    let results = [{"message": message.name},]
 
+  
     // return message.name //For Testing
+
  
     for (let i = 0; i < message.commands.length; i++) {
       if (message.commands[i].commandType === "MOVE") {
         if (this.mode === "LOW_POWER") {
-          currentStatus.results.push([{"completed": false}])
+          results.push({"completed": false})
         } else {
           this.position = message.commands[i].value;
-          currentStatus.results.push([{"completed": true}])
+          results.push({"completed": true})
         } //end if power check
       } //end MOVE message
 
       if (message.commands[i].commandType === "MODE_CHANGE") {
         if (this.mode !== message.commands[i].value) {
           this.mode = message.commands[i].value;
-          currentStatus.results.push([{"completed": true}])
+          results.push({"completed": true})
         } else {
-          currentStatus.results.push([{"completed": false}])
+          results.push({"completed": false})
         }
       } //end MODE message
 
       if (message.commands[i].commandType === "STATUS_CHECK") {
 
-        currentStatus.results.push([{"completed": true, "roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
+        results.push([{"roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
+        // results.push([{"roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
         // currentStatus.results.push([{"completed": true, "roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
       }
     } // end For Loop
-    return currentStatus
+    // return currentStatus
+    return results
     // return this.receiveMessage.results
   } // end method receiveMessage
 } //end Class Rover
