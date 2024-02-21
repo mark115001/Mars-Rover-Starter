@@ -42,7 +42,8 @@ class Rover {
 
       if (message.commands[i].commandType === "STATUS_CHECK") {
 
-      response.results.push([{roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}}])
+      response.results.push({complete: true, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}})
+      // response.results.push([{roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}}])
         // results.push([{"roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
         // currentStatus.results.push([{"completed": true, "roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
       }

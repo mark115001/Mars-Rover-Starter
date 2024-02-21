@@ -20,7 +20,7 @@ describe("Rover class", function () {
   message = new Message("TA power", commands);
   let response = rover.receiveMessage(message)
   
-  // 7 ------- WORKS WITH "STATUS_CHECK"
+  // 7 ------- CONFIRMS CONSTRUCTOR DEFAULT VALUES"
   it("constructor sets position and default values for mode and generatorWatts", function() {
     let defaultValue = new Rover(100)
     expect(defaultValue.generatorWatts).toEqual(110)
@@ -30,16 +30,13 @@ describe("Rover class", function () {
   
 // 8 ------- WORKS WITH ANY RETURN FILE FROM ANY COMMAND
   it("response returned by receiveMessage contains the name of the message", function () {
-      // expect(message.name).toEqual("TA power")
       expect(response.message).toEqual("TA power")
 
     });
 
 // 9 -------
   it("response returned by receiveMessage includes two results if two commands are sent in the message", function () {
-    expect(response.results[3].completed).toBeFalsy
-    expect(response.results[4][0].roverStatus.position).toEqual(4321)
-
+    expect(response.results.length).toEqual(commands.length)
   });
 
 // 10 ------- WORKS WITH "MODE", "MOVE", "STATUS_CHECK"
@@ -47,18 +44,18 @@ describe("Rover class", function () {
 
         expect(response.message).toEqual('TA power')
         expect(response.results[0].completed).toBeTruthy
-        expect(response.results[1][0].roverStatus.position).toEqual(4321)
+        expect(response.results[1].roverStatus.position).toEqual(4321)
         expect(response.results[2].completed).toBeTruthy
         expect(response.results[3].completed).toBeFalsy
-        expect(response.results[4][0].roverStatus.position).toEqual(4321)
-        expect(response.results[4][0].roverStatus.mode).toEqual("LOW_POWER")
-        expect(response.results[4][0].roverStatus.generatorWatts).toEqual(110)
+        expect(response.results[4].roverStatus.position).toEqual(4321)
+        expect(response.results[4].roverStatus.mode).toEqual("LOW_POWER")
+        expect(response.results[4].roverStatus.generatorWatts).toEqual(110)
       });
 
 //11 ------- WORKING WITH MODE TO LOW_POWER AND STATUS_CHECK
   it("responds correctly to the mode change command", function () {
-    expect(response.results[3].completed).toBeTruthy
-    expect(response.results[4][0].roverStatus.mode).toEqual("LOW_POWER")
+    expect(response.results[2].completed).toBeTruthy
+    expect(response.results[4].roverStatus.mode).toEqual("LOW_POWER")
 });
 
 // 12 ------- WORKING WITH MODE CHANGE TO LOW POWER AND A FALSE MOVE
@@ -69,6 +66,6 @@ describe("Rover class", function () {
 // 13 -------   WORKING---STATUS CHECK, LOW POWER, STATUS CHECK
   it("responds with the position for the move command--MOVE command will update the rover's position with the position value in the command", function () {  
       expect(response.results[0].completed).toBeTruthy
-      expect(response.results[1][0].roverStatus.position).toEqual(4321)
+      expect(response.results[1].roverStatus.position).toEqual(4321)
     });
 });
