@@ -14,7 +14,8 @@ class Rover {
     // return currentStatus //For Testing
     
     // let currentStatus = {"message": message.name, "results":[]}
-    let results = [{"message": message.name},]
+    // let results = [{"message": message.name},]
+    let response = {message: message.name, results: [],}
 
   
     // return message.name //For Testing
@@ -23,31 +24,31 @@ class Rover {
     for (let i = 0; i < message.commands.length; i++) {
       if (message.commands[i].commandType === "MOVE") {
         if (this.mode === "LOW_POWER") {
-          results.push({"completed": false})
+          response.results.push({completed: false})
         } else {
           this.position = message.commands[i].value;
-          results.push({"completed": true})
+          response.results.push({completed: true})
         } //end if power check
       } //end MOVE message
 
       if (message.commands[i].commandType === "MODE_CHANGE") {
         if (this.mode !== message.commands[i].value) {
           this.mode = message.commands[i].value;
-          results.push({"completed": true})
+          response.results.push({completed: true})
         } else {
-          results.push({"completed": false})
+          response.results.push({completed: false})
         }
       } //end MODE message
 
       if (message.commands[i].commandType === "STATUS_CHECK") {
 
-        results.push([{"roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
+      response.results.push([{roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}}])
         // results.push([{"roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
         // currentStatus.results.push([{"completed": true, "roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
       }
     } // end For Loop
     // return currentStatus
-    return results
+    return response
     // return this.receiveMessage.results
   } // end method receiveMessage
 } //end Class Rover
