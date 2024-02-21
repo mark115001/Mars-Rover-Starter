@@ -14,34 +14,11 @@ describe("Rover class", function () {
     new Command('MODE_CHANGE', 'LOW_POWER'),
     new Command('MOVE', 3579),
     new Command('STATUS_CHECK')
+  ]
   
-  
-    // new Command('MODE_CHANGE', 'LOW_POWER'),
-    // new Command('MOVE', 3579),
-    // new Command('STATUS_CHECK')
-  
-    
-    // new Command('MODE_CHANGE', 'LOW_POWER'), new Command("STATUS_CHECK")
-    // new Command("STATUS_CHECK")
-    // new Command("MOVE", 3579)
-    // new Command("MOVE", 3579), new Command("STATUS_CHECK")
-    // new Command("STATUS_CHECK")
-    // new Command("MODE_CHANGE", "LOW_POWER")
-    // new Command("MODE_CHANGE", "LOW_POWER"), (new Command("MOVE",4321))
-    // new Command("STATUS_CHECK"),
-    // [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
-    // new Command('STATUS_CHECK'), new Command("MODE_CHANGE", "LOW_POWER"), new Command('MOVE', 4931), new Command('STATUS_CHECK')
-
-    // let rover = new Rover(98382);
-    
-  ];
-  // // let message = new Message("STATUS_CHECK_TEST", commands);
-  // let roverTest = rover.receiveMessage(message);
   let rover = new Rover(100)
-  // message = new Message("Graded Assignment 3-Mars-Rover-Starter", commands);
   message = new Message("TA power", commands);
   let response = rover.receiveMessage(message)
-  // let response = rover.receiveMessage(message)
   
   // 7 ------- WORKS WITH "STATUS_CHECK"
   it("constructor sets position and default values for mode and generatorWatts", function() {
