@@ -8,18 +8,9 @@ class Rover {
     this.generatorWatts = 110;
   } //end constructor
 
-  // message methodW follows
+  // message method follows
   receiveMessage(message) {
-
-    // return currentStatus //For Testing
-    
-    // let currentStatus = {"message": message.name, "results":[]}
-    // let results = [{"message": message.name},]
     let response = {message: message.name, results: [],}
-
-  
-    // return message.name //For Testing
-
  
     for (let i = 0; i < message.commands.length; i++) {
       if (message.commands[i].commandType === "MOVE") {
@@ -43,9 +34,6 @@ class Rover {
       if (message.commands[i].commandType === "STATUS_CHECK") {
 
       response.results.push({complete: true, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}})
-      // response.results.push([{roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}}])
-        // results.push([{"roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
-        // currentStatus.results.push([{"completed": true, "roverStatus": {"mode": this.mode, "generatorWatts": this.generatorWatts, "position": this.position}}])
       }
     } // end For Loop
     // return currentStatus
