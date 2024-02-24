@@ -1,3 +1,4 @@
+// file unaltered
 class Command {
    constructor(commandType, value) {
      this.commandType = commandType;

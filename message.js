@@ -1,5 +1,5 @@
 class Message {
-   constructor(name, commands = []) {   //commands = []
+   constructor(name, commands = []) {   //added commands = []
       this.name = name
       if (!name) {
          throw Error('Name required.');
